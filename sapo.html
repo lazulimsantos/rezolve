@@ -1,0 +1,95 @@
+﻿<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="The Frog, Papel ou Tesoura. Avaliação de seleção Rezolve">
+	    <meta name="author" content="Lázuli Mashal Santos">
+	    <title>O sapo.</title>
+	    <link href="bootstrap.css" rel="stylesheet">
+	    <script src="jquery.js"></script>
+	    <script src="bootstrap.js"></script>
+	</head>
+	<body>
+		<div clss="col-lg-12">
+			<h1>Calculadora de movimentos por polegadas</h1>
+			<div class="input-group col-lg-4">
+			  <input type="text" class="form-control" id="pol" onchange="executa();" placeholder="Informe número de polegadas" aria-describedby="basic-addon2">
+			  <span class="input-group-addon" id="basic-addon2">polegadas</span>
+			</div>
+
+		</div>
+		<hr>
+		<div clss="col-lg-12">
+			<ul class="list-group col-lg-4" id="passos">
+				
+			</ul>
+			<ul class="list-group col-lg-4" id="saltos">
+				
+			</ul>
+			<ul class="list-group col-lg-4" id="saltoepasso">
+				
+			</ul>
+		</div>
+		<script type="text/javascript">
+		function executa() {
+			$('#passos').html("");
+			$('#saltoepasso').html("");
+			$('#saltos').html("");
+			$('#passos').append('<li class="list-group-item active">Possibilidades de Passos</li>');
+			$('#saltos').append('<li class="list-group-item active">Possibilidades de Saltos</li>');
+			$('#saltoepasso').append('<li class="list-group-item active">Possibilidades de Saltos e Passos</li>');
+
+			var pol = $("#pol").val();
+			getSalto(pol);
+			getPasso(pol);
+			getSaltoepasso(pol);
+		}
+
+		function getSaltoepasso(pol) {
+			var passo = pol;
+
+			if (passo >= 2)
+				passo = salto(passo, 'saltoepasso');
+			if (passo > 0 && passo < 2)
+				passada(passo, 'saltoepasso');
+		}
+
+		function getSalto(pol) {
+			var passo = pol;
+
+			if (passo >= 2)
+				passo = salto(passo, 'saltos');
+			else
+				$('#saltos').append('<li class="list-group-item">Não pode saltar com esse valor</li>');
+		}
+
+		function getPasso(pol, campo) {
+			var passo = pol;
+
+			if (passo > 0)
+				passada(passo, 'passos');
+			else
+				$('#passos').append('<li class="list-group-item">Valor inválido!</li>');
+		}
+
+		function passada(passo, campo) {
+			var i = 1;
+			while (i <= passo) {
+				$('#'+campo).append('<li class="list-group-item">Passo</li>');
+				i+=1;
+			}
+			return i;
+		}
+
+		function salto(passo, campo) {
+			var i = 2;
+			while (i <= passo && (i%2) <= passo) {
+				$('#'+campo).append('<li class="list-group-item">Salto</li>');
+				i+=2;
+			}
+			return i-passo;
+		}
+		</script>
+	</body>
+	
+</html>

@@ -1,0 +1,81 @@
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="Jogo clássico Pedra, Papel ou Tesoura. Avaliação de seleção Rezolve">
+	    <meta name="author" content="Lázuli Mashal Santos">
+	    <title>Jogo clássico Pedra, Papel ou Tesoura.</title>
+	    <link href="bootstrap.css" rel="stylesheet">
+	    <script src="jquery.js"></script>
+	    <script src="bootstrap.js"></script>
+	</head>
+	<body>
+		<div clss="col-lg-12">
+			<h1>Escolha entre pedra, papel ou tesoura:</h1>
+			<p><a class="btn btn-primary btn" onclick="executa('pedra')" role="button">Pedra</a>
+		    <a class="btn btn-default btn" onclick="executa('papel')" role="button">Papel</a>
+		    <a class="btn btn-warning btn" onclick="executa('tesoura')" role="button">Tesoura</a></p>
+		</div>
+		<hr>
+		<div clss="col-lg-12">
+			<ul class="list-group col-lg-4">
+			<li class="list-group-item active">
+			    Placar
+			  </li>
+			  <li class="list-group-item">
+			    <span class="badge" id="usuario">0</span>
+			    Usuário
+			  </li>
+			  <li class="list-group-item">
+			    <span class="badge" id="computador">0</span>
+			    Computador
+			  </li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+		function executa(opcao) {
+			
+			var opcaoMaquina = getMaquina();
+			
+			alert("Opção usuário: "+ opcao + "\nOpção computador: "+ opcaoMaquina +"\n"+comparador(opcao, opcaoMaquina));
+		}
+
+		function getMaquina() {
+			var opcoes = ["pedra", "papel", "tesoura"];
+			var indice = Math.floor(Math.random() * opcoes.length);
+			return opcoes[indice];
+		}
+
+		function venceu() {
+			var placar = $("#usuario").html();
+			$("#usuario").html(parseInt(placar) + 1);
+		}
+
+		function perdeu() {
+			var placar = $("#computador").html();
+			$("#computador").html(parseInt(placar) + 1);
+		}
+
+		function comparador(opcao, opcaoMaquina) {
+			if (opcao === 'pedra') {
+				if (opcaoMaquina === 'tesoura') {venceu(); return "Usuário venceu! Pedra quebra tesoura!";}
+				if (opcaoMaquina === 'papel') {perdeu(); return "Usuário perdeu! Papel embrulha pedra!";}
+				if (opcaoMaquina === 'pedra') {venceu(); perdeu();	return "Empate! Ambos escolheram pedra!";}
+			}
+
+			if (opcao === 'papel') {
+				if (opcaoMaquina === 'tesoura') {perdeu(); return "Usuário perdeu! Papel é cortado por tesoura!";}
+				if (opcaoMaquina === 'pedra') {venceu();	return "Usuário venceu! Papel embrulha pedra!";}
+				if (opcaoMaquina === 'papel') {venceu(); perdeu(); return "Empate! Ambos escolheram papel!";}
+			}
+
+			if (opcao === 'tesoura') {
+				if (opcaoMaquina === 'pedra') {perdeu(); return "Usuário perdeu! Pedra quebra tesoura!";}
+				if (opcaoMaquina === 'papel') {venceu();	return "Usuário venceu! Tesoura corta papel!";}
+				if (opcaoMaquina === 'tesoura') {venceu(); perdeu(); return "Empate! Ambos escolheram tesoura!";}
+			}
+		}
+		</script>
+	</body>
+	
+</html>

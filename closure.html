@@ -1,0 +1,29 @@
+﻿<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="Closure. Avaliação de seleção Rezolve">
+	    <meta name="author" content="Lázuli Mashal Santos">
+	    <title>Closure</title>
+	    <link href="bootstrap.css" rel="stylesheet">
+	    <script src="jquery.js"></script>
+	    <script src="bootstrap.js"></script>
+	</head>
+	<body>
+		<div clss="col-lg-12">
+			In my life, I used the following web search engines:<br/>
+		    <a href="//www.yahoo.com">Yahoo!</a><br/>
+		    <a href="//www.altavista.com">AltaVista</a><br/>
+		    <a href="//www.google.com">Google</a><br/>
+		</div>
+		<script type="text/javascript">
+		
+		$('a').click(function(event) {
+		    var as = document.getElementsByTagName('a');
+		    alert( $('a').index(this) );
+		    return false;
+		});
+		</script>
+	</body>
+	
+</html>
